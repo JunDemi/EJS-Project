@@ -1,0 +1,44 @@
+(npm)
+npm init -y
+npm i express mysql dotenv ejs
+npm i --save nodemon
+npm install date-and-time --save
+
+npm start
+
+npm i bcryptjs ->비밀번호 해시값으로 변환
+npm i cookie-parser jsonwebtoken
+(json)
+package.json -> "start" : "nodemon server.js"
+
+(mysql)
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234'; 
+database: jungwook
+table: user / list / commend
+
+CREATE TABLE `jungwook`.`user` (
+  `id` VARCHAR(45) NOT NULL,
+  `pw` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `join` DATETIME NOT NULL,
+  `img` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `jungwook`.`list` (
+  `no` INT NOT NULL AUTO_INCREMENT,
+  `user_id` VARCHAR(45) NOT NULL,
+  `title` VARCHAR(45) NOT NULL,
+  `text` TEXT NOT NULL,
+  `date` DATETIME NOT NULL,
+  `jump` INT NOT NULL,
+  PRIMARY KEY (`no`));
+
+INSERT INTO `jungwook`.`list` (`user_id`, `title`, `text`, `date`, `jump`) VALUES ('3176thomas', 'asd', 'asasdd', now(), '0');
+
+CREATE TABLE `jungwook`.`comment` (
+  `c_no` INT NOT NULL AUTO_INCREMENT,
+  `list_no` INT NOT NULL,
+  `user_id` VARCHAR(100) NOT NULL,
+  `text` TEXT NOT NULL,
+  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`c_no`));
