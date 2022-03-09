@@ -116,7 +116,7 @@ router.get("/update", authCon.isLogin, (req, res) => {
 router.get("/profile", authCon.isLogin, (req, res) => {
   if (req.user) {
     res.render("profile", {
-      user: req.user,
+      user: req.user
     });
   } else {
     res.redirect("/login");

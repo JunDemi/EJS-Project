@@ -49,7 +49,7 @@ exports.isLogin = async (req, res, next) => {
         process.env.JWT_SECRET
       );
       db.query(
-        "SELECT * FROM user WHERE id = ?",
+        "SELECT id, pw, name, DATE_FORMAT(user.join,'%Y년 %m월 %d일') AS date, img FROM user WHERE id = ?",
         [decoded.id],
         (error, result) => {
           if (!result) {

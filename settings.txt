@@ -42,3 +42,7 @@ CREATE TABLE `jungwook`.`comment` (
   `text` TEXT NOT NULL,
   `date` DATETIME NOT NULL,
   PRIMARY KEY (`c_no`));
+
+git config --global user.name JunDemi
+git config --global user.email jungwook3176@gmail.com
+

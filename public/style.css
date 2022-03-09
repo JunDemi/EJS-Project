@@ -40,6 +40,7 @@
     color: #a0ceff;
 }
 /*로그인*/
+
 /*회원가입*/
 .alert-regist{
     border: 1px solid #49a1ff;;
@@ -122,6 +123,21 @@
 }
 .jump_new{
     color: #0065d1;
+}
+/*프로필*/
+.profile img{
+    width: 200px;
+    margin: 10px auto;
+    border-radius: 49%;
+}
+.profile h5{
+    font-size: 15px;
+}
+.profile p{
+    font-size: 13px;
+}
+.profile ul li{
+    font-size: 14px;
 }
 /*글쓰기*/
 .write_text{
