@@ -1,0 +1,44 @@
+<%-include ('header') %>
+    <div class="container mt-4">
+        <div class="main_title">
+            글 수정
+        </div>
+        <form name="update_form" action="/auth/update?u=update" method="post" onsubmit="Check()">
+            <div class="mb-3">
+                <input type="hidden" name="no" value="<%=get.no%>">
+                <input type="text" class="form-control" id="title" name="title" value="<%=view.title%>">
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control write_text" rows="20" id="text" name="text"><%=view.text%></textarea>
+            </div>
+            <% if(locals.message) { %>
+            <h5 class="alert-regist"><%=locals.message %></h5>
+            <% } %>
+
+
+            <div class="btn_wrap">
+                <input type="button" class="btn btn-primary" value="뒤로" onclick="location.href='/view?no=<%=get.no%>'">
+                <input type="submit" class="btn btn-primary" value="변경">
+        </form>
+            <form name="delete_form" action="/auth/update?u=delete" method="post">
+                <input type="button" class="btn btn-primary back_btn" value="삭제" onclick="DeleteCheck()">
+                <input type="hidden" name="no" value="<%=get.no%>">
+            </form>
+            </div>
+    </div>
+    <script>
+        function Check(){
+            if(update_form.title.value === ''){
+                alert('제목 내용이 비어있습니다.');
+            }else if(update_form.text.value === ''){
+                alert('글 내용이 비어있습니다.');
+            }
+        }
+        function DeleteCheck(){
+            if(confirm('게시물을 삭제하시겠습니까?') === true){
+                delete_form.submit();
+            }else{
+                return false;
+            }
+        }
+    </script>
