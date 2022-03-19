@@ -135,9 +135,15 @@ router.get("/update", authCon.isLogin, (req, res) => {
 //프로필 화면
 router.get("/profile", authCon.isLogin, (req, res) => {
   if (req.user) {
-    res.render("profile", {
-      user: req.user,
-    });
+    var id = req.user.id;
+    let sql = "SELECT COUNT(*) AS list_total, (SELECT COUNT(*) FROM comment WHERE user_id = ?) AS comment_total FROM list WHERE user_id = ?";
+    db.query(sql, [id, id], (error, result) =>{
+      if(error) throw error;
+      res.render("profile", {
+        user: req.user,
+        data: result
+      });
+    }); 
   } else {
     res.redirect("/login");
   }

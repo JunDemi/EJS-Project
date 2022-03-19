@@ -20,7 +20,7 @@
                     readonly><%=view.text%></textarea>
             </div>
             <div class="btn_wrap">
-                <input type="button" class="btn btn-primary" value="목록" onclick="history.back()">
+                <input type="button" class="btn btn-primary" value="목록" onclick="location.href='/list?page=<%=get.page%>'">
                 <% if(view.user_id === user.id){ %>
                 <input type="submit" class="btn btn-primary" value="수정">
                 <% } %>          
