@@ -63,7 +63,6 @@ router.get("/list", authCon.isLogin, (req, res) => {
 //검색결과를 출력한 게시판
 router.get("/auth/list", authCon.isLogin, (req, res) => {
   if (req.user) {
-    console.log(req.query.search);
     var search = req.query.search;
     let = "select * from list";
     let sql1 = `SELECT no, title, name, DATE_FORMAT(date,'%m월 %d일') AS date, jump, (SELECT count(*) FROM comment WHERE comment.list_no = list.no) AS c_total FROM list LEFT JOIN user ON list.user_id = user.id WHERE(title LIKE "%${search}%" OR name LIKE "%${search}%" OR date LIKE "%${search}%") ORDER BY no DESC`;
@@ -72,6 +71,7 @@ router.get("/auth/list", authCon.isLogin, (req, res) => {
         user: req.user,
         total: result1.length,
         data: result1,
+        search: search
       });
     });
   } else {
