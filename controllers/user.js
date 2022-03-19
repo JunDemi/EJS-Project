@@ -119,6 +119,10 @@ exports.register = (req, res) => {
     );
   });
 };
+//게시판 검색
+exports.list = (req, res) =>{
+  res.redirect("list?search=" + req.body.search);
+}
 //글쓰기
 exports.write = (req, res) => {
   var { id, title, text } = req.body;

@@ -61,7 +61,23 @@
     color: #0059b8;
     padding: 5px 0;
 }
-.list_title a{
+.list_search{
+    position: relative;
+}
+.list_search input[type=text]{
+    width: 350px;
+    font-size: 14px;
+    padding: 3px 0px 3px 5px;
+}
+.list_search img{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: 10px;
+    top: 7px;
+    cursor: pointer;
+}
+.write_link{
     font-size: 15px;
     background-color: #007bff;
     border-radius: 5px;
@@ -70,7 +86,7 @@
     text-decoration: none;
     transition: .2s;
 }
-.list_title a:hover{
+.write_link:hover{
     background-color: #0065d1;
     color: #fff;
     text-decoration: none;

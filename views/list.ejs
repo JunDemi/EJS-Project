@@ -9,7 +9,13 @@ var end_link = locals.end_link;
         </div>
         <div class="list_title">
             <h5><%=total%>개의 글이 조회되었습니다.</h5>
-            <a href="/write">글쓰기</a>
+            <div class="list_search">
+                <form name="list_search_form" action="/auth/list" method="post">
+                    <input name="search" id="search" type="text" placeholder="검색..">
+                    <a onclick="listSearch()"><img src="/search.png"></a>
+                </form>
+            </div>
+            <a class="write_link" href="/write">글쓰기</a>
         </div>
         <table class="list">
             <tr>
@@ -60,3 +66,13 @@ var end_link = locals.end_link;
             </ul>
         </nav>
     </div>
+    <script>
+        function listSearch(){
+            if(list_search_form.search.value == ''){
+                alert("검색어가 없습니다.");
+                return false;
+            }else{
+                list_search_form.submit();
+            }
+        }
+    </script>

@@ -35,7 +35,8 @@ router.get("/list", authCon.isLogin, (req, res) => {
       }
       //Limit 시작번호
       var start_limit = (page - 1) * resultsPerPage;
-      let sql2 = "SELECT no, title, name, DATE_FORMAT(date,'%m월 %d일') AS date, jump, (SELECT count(*) FROM comment WHERE comment.list_no = list.no) AS c_total FROM list LEFT JOIN user ON list.user_id = user.id ORDER BY no DESC LIMIT ?, ?";
+      let sql2 =
+        "SELECT no, title, name, DATE_FORMAT(date,'%m월 %d일') AS date, jump, (SELECT count(*) FROM comment WHERE comment.list_no = list.no) AS c_total FROM list LEFT JOIN user ON list.user_id = user.id ORDER BY no DESC LIMIT ?, ?";
       db.query(sql2, [start_limit, resultsPerPage], (err, result2) => {
         if (err) throw err;
         let iterator = page - 5 < 1 ? 1 : page - 5;
@@ -44,15 +45,33 @@ router.get("/list", authCon.isLogin, (req, res) => {
         if (end_link < page + 4) {
           iterator -= page + 4 - num_pages;
         }
-          res.render("list", {
-            user: req.user,
-            total: result1.length,
-            data: result2,
-            iterator,
-            end_link,
-            num_pages,
-            page,
-          });
+        res.render("list", {
+          user: req.user,
+          total: result1.length,
+          data: result2,
+          iterator,
+          end_link,
+          num_pages,
+          page,
+        });
+      });
+    });
+  } else {
+    res.redirect("/login");
+  }
+});
+//검색결과를 출력한 게시판
+router.get("/auth/list", authCon.isLogin, (req, res) => {
+  if (req.user) {
+    console.log(req.query.search);
+    var search = req.query.search;
+    let = "select * from list";
+    let sql1 = `SELECT no, title, name, DATE_FORMAT(date,'%m월 %d일') AS date, jump, (SELECT count(*) FROM comment WHERE comment.list_no = list.no) AS c_total FROM list LEFT JOIN user ON list.user_id = user.id WHERE(title LIKE "%${search}%" OR name LIKE "%${search}%" OR date LIKE "%${search}%") ORDER BY no DESC`;
+    db.query(sql1, (err, result1) => {
+      res.render("search_list", {
+        user: req.user,
+        total: result1.length,
+        data: result1,
       });
     });
   } else {
@@ -76,18 +95,19 @@ router.get("/view", authCon.isLogin, (req, res) => {
     let jump = "UPDATE list SET jump = jump + 1 WHERE no = ?"; //조회수 증가
     db.query(jump, [list_no], (err1, result1) => {
       if (err1) throw err1;
-      let sql = "SELECT user_id, user.name, DATE_FORMAT(user.join,'%Y년 %m월 %d일') AS date, title, text FROM list JOIN user ON list.user_id = user.id WHERE no = ?";
+      let sql =
+        "SELECT user_id, user.name, DATE_FORMAT(user.join,'%Y년 %m월 %d일') AS date, title, text FROM list JOIN user ON list.user_id = user.id WHERE no = ?";
       db.query(sql, [list_no], (err2, result2) => {
         if (err2) throw err2;
         let sql2 =
           "SELECT c_no, list_no, comment.user_id, name, DATE_FORMAT(comment.date,'%m월 %d일 %H시 %i분') AS date, comment.text FROM comment JOIN user ON comment.user_id = user.id JOIN jungwook.list ON comment.list_no = list.no WHERE list_no = ? ORDER BY c_no DESC";
-        db.query(sql2, [list_no], (err3, result3) =>{
+        db.query(sql2, [list_no], (err3, result3) => {
           if (err3) throw err3;
           res.render("view", {
             user: req.user,
             get: req.query,
             view: result2[0],
-            comment: result3
+            comment: result3,
           });
         });
       });
@@ -116,7 +136,7 @@ router.get("/update", authCon.isLogin, (req, res) => {
 router.get("/profile", authCon.isLogin, (req, res) => {
   if (req.user) {
     res.render("profile", {
-      user: req.user
+      user: req.user,
     });
   } else {
     res.redirect("/login");

@@ -1,0 +1,60 @@
+<%-include ('header') %>
+    <div class="container mt-4">
+        <div class="main_title">
+            게시판
+        </div>
+        <div class="list_title">
+            <h5><%=total%>개의 글이 조회되었습니다.</h5>
+            <div class="list_search">
+                <form name="list_search_form" action="/auth/list" method="post">
+                    <input name="search" id="search" type="text" placeholder="검색..">
+                    <a onclick="listSearch()"><img src="/search.png"></a>
+                </form>
+            </div>
+            <a class="write_link" href="/write">글쓰기</a>
+        </div>
+        <table class="list">
+            <tr>
+                <td>제목</td>
+                <td>작성자</td>
+                <td>작성일</td>
+                <td>조회수</td>
+            </tr>
+        <%
+        if(data.length === 0){
+        %>
+            <tr>
+                <td colspan="4" align="center">작성된 게시글이 없습니다.</td>
+            </tr>
+        <%
+        }else{
+            data.forEach(list => { 
+                if(list.jump === 0){
+                    var newlist = 'new';
+                    var jump_new = 'jump_new';
+                } else{
+                    var newlist = list.jump;
+                    var jump_new = '';
+                }
+            %>
+            <tr>
+                <td><a href="/view?no=<%=list.no%>"><%=list.title%></a>&nbsp;&nbsp;<span>(<%=list.c_total%>)</span></td>
+                <td><%=list.name%></td>
+                <td><%=list.date%></td>
+                <td class="<%=jump_new%>"><%=newlist%></td>
+            </tr>
+            <% })} %>     
+        </table>
+        <nav>
+        </nav>
+    </div>
+    <script>
+        function listSearch(){
+            if(list_search_form.search.value == ''){
+                alert("검색어가 없습니다.");
+                return false;
+            }else{
+                list_search_form.submit();
+            }
+        }
+    </script>
