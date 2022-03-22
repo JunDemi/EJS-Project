@@ -4,9 +4,9 @@
             글 조회
         </div>
         <nav class="introduce_writer">
-            <img src="/default2.png">
+            <img src="/<%=view.img%>">
             <span><%=view.name%></span>
-            <p>가입일: <%=view.date%></p>
+            <p>작성일 - <%=view.date%></p>
         </nav>
         <form name="view_form" action="/auth/view" method="post">
             <input type="hidden" name="no" value="<%=get.no%>">
@@ -39,7 +39,7 @@
         <h5 class="comment_total">댓글 <%=comment.length%>개</h5>
         <% comment.forEach(list => { %>
             <div class="comment_list">
-                <img src="/default4.png">
+                <img src="/<%=list.img%>">
                 <span><%=list.name%>&nbsp;-&nbsp;&nbsp;<%=list.date%></span>
                 <div>
                     <p><%=list.text%></p>

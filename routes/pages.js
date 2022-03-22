@@ -96,11 +96,11 @@ router.get("/view", authCon.isLogin, (req, res) => {
     db.query(jump, [list_no], (err1, result1) => {
       if (err1) throw err1;
       let sql =
-        "SELECT user_id, user.name, DATE_FORMAT(user.join,'%Y년 %m월 %d일') AS date, title, text FROM list JOIN user ON list.user_id = user.id WHERE no = ?";
+        "SELECT user_id, user.name, img, DATE_FORMAT(list.date,'%Y년 %m월 %d일 %I시 %i분') AS date, title, text FROM list JOIN user ON list.user_id = user.id WHERE no = ?";
       db.query(sql, [list_no], (err2, result2) => {
         if (err2) throw err2;
         let sql2 =
-          "SELECT c_no, list_no, comment.user_id, name, DATE_FORMAT(comment.date,'%m월 %d일 %H시 %i분') AS date, comment.text FROM comment JOIN user ON comment.user_id = user.id JOIN jungwook.list ON comment.list_no = list.no WHERE list_no = ? ORDER BY c_no DESC";
+          "SELECT c_no, list_no, comment.user_id, name, img, DATE_FORMAT(comment.date,'%m월 %d일 %H시 %i분') AS date, comment.text FROM comment JOIN user ON comment.user_id = user.id JOIN jungwook.list ON comment.list_no = list.no WHERE list_no = ? ORDER BY c_no DESC";
         db.query(sql2, [list_no], (err3, result3) => {
           if (err3) throw err3;
           res.render("view", {
