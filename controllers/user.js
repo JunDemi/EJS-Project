@@ -2,7 +2,6 @@ var db = require("../connection");
 var jwt = require("jsonwebtoken");
 var { promisify } = require("util");
 
-
 //로그인-접속하기
 exports.login = async (req, res) => {
   try {
@@ -16,7 +15,7 @@ exports.login = async (req, res) => {
       "SELECT * FROM user WHERE id = ?",
       [id],
       async (error, results) => {
-        if (results == '' || pw !== results[0].pw) {
+        if (results == "" || pw !== results[0].pw) {
           res.status(401).render("login", {
             message: "아이디 및 비밀번호가 일치하지 않습니다.",
           });
@@ -79,7 +78,7 @@ exports.logout = async (req, res) => {
 };
 //회원가입
 exports.register = (req, res) => {
-  var { id, name, pw, pw_check} = req.body;
+  var { id, name, pw, pw_check } = req.body;
   var image = req.file.filename;
   db.query("SELECT id FROM user WHERE id = ?", [id], async (error, result) => {
     if (error) {
@@ -122,9 +121,9 @@ exports.register = (req, res) => {
   });
 };
 //게시판 검색
-exports.list = (req, res) =>{
+exports.list = (req, res) => {
   res.redirect("list?search=" + req.body.search);
-}
+};
 //글쓰기
 exports.write = (req, res) => {
   var { id, title, text } = req.body;
@@ -158,21 +157,18 @@ exports.view = (req, res) => {
   var getParam = req.query.c;
   if (getParam === "insert") {
     var { text, user_id, list_no } = req.body;
-    if (text === "") {
+    let sql = "INSERT INTO comment VALUES(null,?,?,?,now())";
+    db.query(sql, [list_no, user_id, text], (error, result) => {
+      if (error) throw error;
       res.status(200).redirect(`/view?no=${list_no}`);
-    } else{
-      let sql = "INSERT INTO comment VALUES(null,?,?,?,now())";
-      db.query(sql, [list_no, user_id, text], (error, result) => {
-        if(error) throw error;
-        res.status(200).redirect(`/view?no=${list_no}`);
-      });
-    }
-  //댓글 삭제
-  } else if(getParam === "delete"){
+    });
+    //댓글 삭제
+  } else if (getParam === "delete") {
     var { c_no, list_no } = req.body;
+    console.log('댓삭');
     let sql2 = "DELETE FROM comment WHERE c_no = ?";
-    db.query(sql2, [c_no], (error, result2)=> {
-      if(error) throw error;
+    db.query(sql2, [c_no], (error, result2) => {
+      if (error) throw error;
       res.status(200).redirect(`/view?no=${list_no}`);
     });
   } else {
@@ -191,7 +187,7 @@ exports.update = (req, res) => {
     } else if (text === "") {
       res.status(200).redirect(`/update?no=${no}`);
     } else {
-      let sql1 = `UPDATE list SET title = ?,text = ? WHERE no = ?`;
+      let sql1 = `UPDATE list SET title = ?,text = ?, date = now() WHERE no = ?`;
       db.query(sql1, [title, text, no], (error1, result1) => {
         if (error1) throw error1;
         res.status(200).redirect("/list");
