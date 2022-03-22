@@ -28,7 +28,7 @@
         </form>
         <form name="comment_form" action="/auth/view?c=insert" method="post" onsubmit="commentCheck()">
             <div class="comment_write">
-                <img src="/default.png">
+                <img src="/<%=user.img%>">
                 <span><%=user.name%></span>
                 <textarea class="form-control write_text" rows="3" placeholder="댓글을 입력하세요..." name="text"></textarea>
                 <input type="hidden" name="user_id" value="<%=user.id%>">

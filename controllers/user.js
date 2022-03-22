@@ -2,6 +2,7 @@ var db = require("../connection");
 var jwt = require("jsonwebtoken");
 var { promisify } = require("util");
 
+
 //로그인-접속하기
 exports.login = async (req, res) => {
   try {
@@ -78,7 +79,8 @@ exports.logout = async (req, res) => {
 };
 //회원가입
 exports.register = (req, res) => {
-  var { id, name, pw, pw_check } = req.body;
+  var { id, name, pw, pw_check} = req.body;
+  var image = req.file.filename;
   db.query("SELECT id FROM user WHERE id = ?", [id], async (error, result) => {
     if (error) {
       console.log(error);
@@ -105,8 +107,8 @@ exports.register = (req, res) => {
       });
     }
     db.query(
-      "INSERT INTO user VALUES(?,?,?,now(),null)",
-      [id, pw, name],
+      "INSERT INTO user VALUES(?,?,?,now(),?)",
+      [id, pw, name, image],
       (error, result) => {
         if (error) {
           console.log(error);
