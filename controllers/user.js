@@ -165,7 +165,6 @@ exports.view = (req, res) => {
     //댓글 삭제
   } else if (getParam === "delete") {
     var { c_no, list_no } = req.body;
-    console.log('댓삭');
     let sql2 = "DELETE FROM comment WHERE c_no = ?";
     db.query(sql2, [c_no], (error, result2) => {
       if (error) throw error;
