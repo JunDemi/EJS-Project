@@ -130,7 +130,8 @@ exports.list = (req, res) => {
 };
 //글쓰기
 exports.write = (req, res) => {
-  var { id, title, text } = req.body;
+  var { id, title, text, name, img } = req.body;
+  console.log(req.body);
   if (title === "") {
     return res.render("write", {
       message: "제목을 입력하세요.",
