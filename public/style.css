@@ -9,7 +9,7 @@
 /*헤더 타이블 바*/
 .title_bar{
     background-color: #007bff;
-    padding: 30px 60px;
+    padding: 28px 60px;
     display: flex;
     justify-content: space-between;
 }
@@ -28,6 +28,18 @@
 }
 .title_bar ul li{
     list-style: none;
+}
+.title_bar ul li img{
+    width: 22px;
+    height: 22px;
+    border-radius: 49%;
+    margin-right: 10px;
+}
+.title_bar ul li span{
+    font-size: 13px;
+    font-weight: lighter;
+    color: #fff;
+    margin-right: 30px;
 }
 .title_bar ul li a{
     font-size: 13px;

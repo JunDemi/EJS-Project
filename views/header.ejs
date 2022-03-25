@@ -14,17 +14,24 @@
         crossorigin="anonymous"></script>
 </head>
 <nav class="title_bar">
-    <a class="title_text" href="/"><h4>Express JS Project</h4></a>
-    <ul>
+    <div>
+        <a class="title_text" href="/"><h4>Express JS Project</h4></a>
+    </div>
+    <div>
         <% if(locals.user) { %>
-        <li><a href="/">홈</a></li>
-        <li><a href="/list">게시판</a></li>
-        <li><a href="/profile">프로필</a></li>
-        <li><a href="/auth/logout">로그아웃</a></li>
+        <ul>
+            <li><img src="/<%=user.img%>"><span><%=user.name%>님</span></li>
+            <li><a href="/">홈</a></li>
+            <li><a href="/list">게시판</a></li>
+            <li><a href="/profile">프로필</a></li>
+            <li><a href="/auth/logout">로그아웃</a></li>
+        </ul>
         <% } else { %>
-        <li><a href="/">홈</a></li>
-        <li><a href="/login">로그인</a></li>
-        <li><a href="/register">회원가입</a></li>
+        <ul>
+            <li><a href="/">홈</a></li>
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
+        </ul>
         <% } %>
-    </ul>
+    </div>
 </nav>
