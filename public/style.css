@@ -52,15 +52,32 @@
     color: #a0ceff;
 }
 /*로그인*/
-
+.myform label{
+    font-size: 14px;
+}
 /*회원가입*/
 .alert-regist{
-    border: 1px solid #49a1ff;;
-    background-color: #a0ceff;;
+    border: 1px solid #49a1ff;
+    background-color: #a0ceff;
     color: #007bff;
     padding: 15px 15px;
     margin: 20px 0 0 0;
     border-radius: 10px;
+}
+.img_container{
+    width: 153px;
+    height: 153px;
+    border: 2px solid #49a1ff;
+    margin-bottom: 10px;
+    text-align: center;
+}
+#View{
+    margin: auto;
+    max-width: 147px;
+    max-height: 147px;
+}
+#image{
+    font-size: 14px;
 }
 /*게시판*/
 .list_title{

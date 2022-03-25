@@ -79,7 +79,7 @@ exports.logout = async (req, res) => {
 //회원가입
 exports.register = (req, res) => {
   var { id, name, pw, pw_check } = req.body;
-  var image = req.file.filename;
+  var image = req.file;
   db.query("SELECT id FROM user WHERE id = ?", [id], async (error, result) => {
     if (error) {
       console.log(error);
@@ -104,10 +104,14 @@ exports.register = (req, res) => {
       return res.render("register", {
         message: "비밀번호를 입력하세요.",
       });
+    } else if (!image){
+      return res.render("register", {
+        message: "프로필 사진을 등록하세요.",
+      });
     }
     db.query(
       "INSERT INTO user VALUES(?,?,?,now(),?)",
-      [id, pw, name, image],
+      [id, pw, name, image.filename],
       (error, result) => {
         if (error) {
           console.log(error);
