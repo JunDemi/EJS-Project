@@ -36,7 +36,7 @@ router.get("/list", authCon.isLogin, (req, res) => {
       //Limit 시작번호
       var start_limit = (page - 1) * resultsPerPage;
       let sql2 =
-        "SELECT no, title, name, DATE_FORMAT(date,'%m월 %d일') AS date, jump, (SELECT count(*) FROM comment WHERE comment.list_no = list.no) AS c_total FROM list LEFT JOIN user ON list.user_id = user.id ORDER BY no DESC LIMIT ?, ?";
+        "SELECT no, title, name, DATE_FORMAT(date,'%m월 %d일') AS date, jump, (SELECT count(*) FROM comment WHERE comment.list_no = list.no) AS c_total FROM list JOIN user ON list.user_id = user.id ORDER BY no DESC LIMIT ?, ?";
       db.query(sql2, [start_limit, resultsPerPage], (err, result2) => {
         if (err) throw err;
         let iterator = page - 5 < 1 ? 1 : page - 5;
@@ -65,7 +65,7 @@ router.get("/auth/list", authCon.isLogin, (req, res) => {
   if (req.user) {
     var search = req.query.search;
     let = "select * from list";
-    let sql1 = `SELECT no, title, name, DATE_FORMAT(date,'%m월 %d일') AS date, jump, (SELECT count(*) FROM comment WHERE comment.list_no = list.no) AS c_total FROM list LEFT JOIN user ON list.user_id = user.id WHERE(title LIKE "%${search}%" OR name LIKE "%${search}%" OR date LIKE "%${search}%") ORDER BY no DESC`;
+    let sql1 = `SELECT no, title, name, DATE_FORMAT(date,'%m월 %d일') AS date, jump, (SELECT count(*) FROM comment WHERE comment.list_no = list.no) AS c_total FROM list JOIN user ON list.user_id = user.id WHERE(title LIKE "%${search}%" OR name LIKE "%${search}%" OR date LIKE "%${search}%") ORDER BY no DESC`;
     db.query(sql1, (err, result1) => {
       res.render("search_list", {
         user: req.user,
