@@ -15,7 +15,7 @@
         }
     }
 </script>
-    <div class="container mt-4 myform myform_update">
+    <div class="container mt-4 myform myform_bottom">
         <div class="main_title">
             글 수정
         </div>
@@ -26,9 +26,15 @@
             </div>
             <div class="mb-3">
                 <textarea class="form-control write_text" rows="20" id="text" name="text"><%=view.text%></textarea>
+            <% if(view.file){ %>
                 <img src="/<%=view.file%>" id="write_view">
             </div>
-            <input type="file" id="view_update_files" name="view_update_files">
+            <input type="file" id="view_update_files" name="view_update_files" value="<%=view.file%>">
+            <% }else { %>
+                <img id="write_view">
+            </div>   
+            <input type="file" id="view_update_files" name="view_update_files" value="<%=view.file%>">
+            <% } %>
             <% if(locals.message) { %>
             <h5 class="alert-regist"><%=locals.message %></h5>
             <% } %>
