@@ -131,7 +131,12 @@ exports.list = (req, res) => {
 //글쓰기
 exports.write = (req, res) => {
   var { id, title, text, name, img } = req.body;
-  console.log(req.body);
+  var image = req.file;
+  if(!image){ //파일입력을 안 했을 때
+    var files = null;
+  }else{
+    var files = image.filename;
+  }
   if (title === "") {
     return res.render("write", {
       message: "제목을 입력하세요.",
@@ -144,8 +149,8 @@ exports.write = (req, res) => {
     });
   } else {
     db.query(
-      "INSERT INTO list VALUES(null,?,?,?,now(),0)",
-      [id, title, text],
+      "INSERT INTO list VALUES(null,?,?,?,now(),?,0)",
+      [id, title, text, files],
       (error, result) => {
         if (error) {
           console.log(error);

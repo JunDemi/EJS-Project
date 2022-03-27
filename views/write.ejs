@@ -1,9 +1,25 @@
 <%-include ('header') %>
+<script type="text/javascript">
+    $(function() {
+        $("#files").on('change', function(){
+        readURL(this);
+        });
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            $('#write_view').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 <div class="container mt-4 myform">
     <div class="main_title">
         글쓰기
     </div>
-    <form name="write_form" action="/auth/write" method="post">
+    <form name="write_form" action="/auth/write" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <input type="hidden" id="id" name="id" value="<%=user.id%>">
             <input type="hidden" id="name" name="name" value="<%=user.name%>">
@@ -12,6 +28,10 @@
         </div>
         <div class="mb-3">
             <textarea class="form-control write_text" placeholder="내용" rows="20" id="text" name="text"></textarea>
+            <img id="write_view"/>
+        </div>
+        <div class="mb-3">
+            <input type="file" id="files" name="files">
         </div>
         <% if(locals.message) { %>
         <h5 class="alert-regist"><%=locals.message %></h5>

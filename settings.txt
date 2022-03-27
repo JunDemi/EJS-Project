@@ -34,7 +34,7 @@ CREATE TABLE `jungwook`.`list` (
   `jump` INT NOT NULL,
   PRIMARY KEY (`no`));
 
-INSERT INTO `jungwook`.`list` (`user_id`, `title`, `text`, `date`, `jump`) VALUES ('3176thomas', 'asd', 'asasdd', now(), '0');
+INSERT INTO `jungwook`.`list` (`user_id`, `title`, `text`, `date`, `jump`) VALUES ('3176thomas', '안녕하세요', '안녕하십니까', '2022-03-27', '0');
 
 CREATE TABLE `jungwook`.`comment` (
   `c_no` INT NOT NULL AUTO_INCREMENT,

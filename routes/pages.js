@@ -96,7 +96,7 @@ router.get("/view", authCon.isLogin, (req, res) => {
     db.query(jump, [list_no], (err1, result1) => {
       if (err1) throw err1;
       let sql =
-        "SELECT user_id, user.name, img, DATE_FORMAT(list.date,'%Y년 %m월 %d일 %I시 %i분') AS date, title, text FROM list JOIN user ON list.user_id = user.id WHERE no = ?";
+        "SELECT user_id, user.name, img, DATE_FORMAT(list.date,'%Y년 %m월 %d일 %I시 %i분') AS date, title, text, file FROM list JOIN user ON list.user_id = user.id WHERE no = ?";
       db.query(sql, [list_no], (err2, result2) => {
         if (err2) throw err2;
         let sql2 =

@@ -13,11 +13,10 @@ var storage = multer.diskStorage({
 });
 var upload = multer({storage: storage}); 
 
-
 router.post('/register', upload.single("image"), authCon.register);
 router.post('/login', authCon.login);
 router.post('/list', authCon.list);
-router.post('/write', authCon.write);
+router.post('/write', upload.single("files"), authCon.write);
 router.post('/view', authCon.view);
 router.post('/update', authCon.update);
 router.get('/logout', authCon.logout);

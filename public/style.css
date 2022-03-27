@@ -195,6 +195,13 @@
     font-weight: bold;
     color: #004c9c;
 }
+#write_view{
+    max-width: 350px;
+    margin: 10px 0;
+}
+#files{
+    font-size: 14px;
+}
 /*글 조회/수정*/
 .back_btn{
     background-color: #f54689;
@@ -209,6 +216,10 @@
 }
 .btn_wrap input{
     margin-right: 5px;
+}
+.view_img{
+    max-width: 350px;
+    margin-top: 10px;
 }
 /*글 작성자*/
 .introduce_writer span{
