@@ -190,14 +190,20 @@ exports.view = (req, res) => {
 exports.update = (req, res) => {
   var getParam = req.query.u; //전송된 get 파라미터
   var { no, title, text } = req.body;
+  var image = req.file;
+  if(!image){ //파일입력을 안 했을 때
+    var files = null;
+  }else{
+    var files = image.filename;
+  }
   if (getParam === "update") {
     if (title === "") {
       res.status(200).redirect(`/update?no=${no}`);
     } else if (text === "") {
       res.status(200).redirect(`/update?no=${no}`);
     } else {
-      let sql1 = `UPDATE list SET title = ?,text = ?, date = now() WHERE no = ?`;
-      db.query(sql1, [title, text, no], (error1, result1) => {
+      let sql1 = `UPDATE list SET title = ?, text = ?, file = ?, date = now() WHERE no = ?`;
+      db.query(sql1, [title, text, files, no], (error1, result1) => {
         if (error1) throw error1;
         res.status(200).redirect("/list");
       });

@@ -119,7 +119,7 @@ router.get("/view", authCon.isLogin, (req, res) => {
 //글수정 화면
 router.get("/update", authCon.isLogin, (req, res) => {
   if (req.user) {
-    let sql = "SELECT user_id, title, text FROM list WHERE no = ?";
+    let sql = "SELECT user_id, title, text, file FROM list WHERE no = ?";
     db.query(sql, [req.query.no], (err, result) => {
       if (err) throw err;
       res.render("update", {
@@ -148,5 +148,20 @@ router.get("/profile", authCon.isLogin, (req, res) => {
     res.redirect("/login");
   }
 });
-
+//프로필-정보수정 화면
+router.get("/user_update", authCon.isLogin, (req, res) => {
+  if (req.user) {
+    var id = req.user.id;
+    let sql = "SELECT name, pw, img FROM user WHERE id = ?";
+    db.query(sql, [id], (error, result) =>{
+      if(error) throw error;
+      res.render("user_update", {
+        user: req.user,
+        data: result[0]
+      });
+    }); 
+  } else {
+    res.redirect("/login");
+  }
+});
 module.exports = router;

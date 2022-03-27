@@ -18,7 +18,7 @@ router.post('/login', authCon.login);
 router.post('/list', authCon.list);
 router.post('/write', upload.single("files"), authCon.write);
 router.post('/view', authCon.view);
-router.post('/update', authCon.update);
+router.post('/update', upload.single("view_update_files"), authCon.update);
 router.get('/logout', authCon.logout);
 
 module.exports = router;

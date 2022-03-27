@@ -1,0 +1,37 @@
+<%-include ('header') %>
+<script type="text/javascript">
+    $(function() {
+        $("#image").on('change', function(){
+        readURL(this);
+        });
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            $('#View').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<div class="container mt-4">
+    <div class="main_title">
+        회원정보수정
+    </div>
+    <form name="user_update_form" action="" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="image" class="form-label">프로필 사진</label>
+            <div class="img_container">
+                <img id="View" src="/<%=data.img%>">
+            </div>
+            <input type="file" id="image" name="image">
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">이름</label>
+            <input type="text" class="form-control regist_text" id="name" name="name" value="<%=data.name%>">
+        </div>
+        <input type="button" class="btn btn-primary" value="변경">
+        <input type="button" class="btn btn-primary back_btn" value="탈퇴">
+    </form>
+</div>
