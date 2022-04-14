@@ -164,4 +164,15 @@ router.get("/user_update", authCon.isLogin, (req, res) => {
     res.redirect("/login");
   }
 });
+//프로필-정보수정-비밀번호 확인 화면
+router.get("/user_update_check", authCon.isLogin, (req, res) => {
+  if (req.user) {
+    res.render("user_update_check", {
+      user: req.user,
+      page_type: req.query.u
+    });
+  } else {
+    res.redirect("/login");
+  }
+});
 module.exports = router;

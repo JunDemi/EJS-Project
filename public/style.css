@@ -65,16 +65,15 @@
     border-radius: 10px;
 }
 .img_container{
-    width: 153px;
-    height: 153px;
+    height: 185px;
     border: 2px solid #49a1ff;
     margin-bottom: 10px;
     text-align: center;
 }
 #View{
     margin: auto;
-    max-width: 147px;
-    max-height: 147px;
+    max-width: 178px;
+    max-height: 178px;
 }
 #image{
     font-size: 14px;
@@ -186,6 +185,15 @@
 }
 .profile ul li{
     font-size: 14px;
+}
+/*회원정보 수정*/
+.update_img{
+    width: 185px;
+    text-align: center;
+}
+.update_img input{
+    width: 100px;
+    font-size: 12px;
 }
 /*글쓰기*/
 .write_text{

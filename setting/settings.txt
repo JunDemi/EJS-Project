@@ -32,6 +32,7 @@ CREATE TABLE `jungwook`.`list` (
   `text` TEXT NOT NULL,
   `date` DATETIME NOT NULL,
   `jump` INT NOT NULL,
+  `file` VARCHAR(100) NULL,
   PRIMARY KEY (`no`));
 
 INSERT INTO `jungwook`.`list` (`user_id`, `title`, `text`, `date`, `jump`) VALUES ('3176thomas', '안녕하세요', '안녕하십니까', '2022-03-27', '0');

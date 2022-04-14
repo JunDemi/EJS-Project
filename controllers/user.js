@@ -216,3 +216,14 @@ exports.update = (req, res) => {
     });
   }
 };
+exports.user_update_check = (req, res) => {
+  var {id, pw, pw_check} = req.body;
+  page_type = req.query.u;
+  if(page_type === 'delete'){
+    
+  }else if(page_type === 'update'){
+
+  }else if(page_type === 'password'){
+    
+  }
+}
