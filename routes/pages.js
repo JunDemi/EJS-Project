@@ -168,8 +168,7 @@ router.get("/user_update", authCon.isLogin, (req, res) => {
 router.get("/user_update_check", authCon.isLogin, (req, res) => {
   if (req.user) {
     res.render("user_update_check", {
-      user: req.user,
-      page_type: req.query.u
+      user: req.user
     });
   } else {
     res.redirect("/login");

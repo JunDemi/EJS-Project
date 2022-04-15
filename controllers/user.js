@@ -149,7 +149,7 @@ exports.write = (req, res) => {
     });
   } else {
     db.query(
-      "INSERT INTO list VALUES(null,?,?,?,now(),?,0)",
+      "INSERT INTO list VALUES(null,?,?,?,now(),0,?)",
       [id, title, text, files],
       (error, result) => {
         if (error) {
@@ -216,13 +216,50 @@ exports.update = (req, res) => {
     });
   }
 };
+//회원정보 수정 이전 비밀번호 확인
 exports.user_update_check = (req, res) => {
-  var {id, pw, pw_check} = req.body;
-  page_type = req.query.u;
+  var {id, pw} = req.body;
+  if(!pw){
+    return res.status(400).render("user_update_check", {
+      message: "비밀번호를 입력하세요",
+      user: req.body
+    });
+  }
+  let sql = "SELECT * FROM user WHERE id = ?";
+  db.query(sql, [id], async (error, result) =>{
+    if(error) throw error;
+    if (pw !== result[0].pw) {
+      res.status(401).render("user_update_check", {
+        message: "비밀번호가 일치하지 않습니다.",
+        user: req.body
+      });
+    }else{
+      res.status(200).redirect("/user_update");
+    }
+  });
+}
+//회원정보 수정/탈퇴
+exports.user_update = (req, res) => {
+  var page_type = req.query.u;
+  var {id, name, pw} = req.body;
   if(page_type === 'delete'){
-    
+    db.query("DELETE FROM user WHERE id = ?", [id], (error1, result1) =>{ //모든 정보 삭제(본인 회원정보)
+      if(error1) throw error1;
+      db.query("DELETE FROM list WHERE user_id = ?", [id], (error2, result2) =>{ //모든 정보 삭제(본인 글)
+        if(error2) throw error2;
+        db.query("DELETE FROM comment WHERE user_id = ?", [id], (error3, result3) =>{ //모든 정보 삭제(본인 댓글)
+          if(error3) throw error3;
+          res.cookie("jwt", "", {
+            //쿠키의 value값을 공백으로 하여 쿠키 제거
+            expires: new Date(Date.now() + 2 * 1000),
+            httpOnly: true,
+          });
+          res.status(200).redirect("/");
+        });
+      });
+    });
   }else if(page_type === 'update'){
-
+    
   }else if(page_type === 'password'){
     
   }
