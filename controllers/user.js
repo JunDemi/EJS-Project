@@ -250,7 +250,7 @@ exports.user_update = (req, res) => {
         db.query("DELETE FROM comment WHERE user_id = ?", [id], (error3, result3) =>{ //모든 정보 삭제(본인 댓글)
           if(error3) throw error3;
           res.cookie("jwt", "", {
-            //쿠키의 value값을 공백으로 하여 쿠키 제거
+            //회원 탈퇴와 동시에 쿠키 제거
             expires: new Date(Date.now() + 2 * 1000),
             httpOnly: true,
           });
