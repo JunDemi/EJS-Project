@@ -48,4 +48,4 @@ CREATE TABLE `jungwook`.`comment` (
 git config --global user.name JunDemi
 git config --global user.email jungwook3176@gmail.com
 
-*댓글 테이블에 글을 작성한 사람의 ID도 컬럼에 포함시킬 것*
+*댓글 테이블에 글을 작성한 유저의 ID도 컬럼에 포함시킬 것*
