@@ -241,8 +241,9 @@ exports.user_update_check = (req, res) => {
 //회원정보 수정/탈퇴
 exports.user_update = (req, res) => {
   var page_type = req.query.u;
-  var {id, name, pw} = req.body;
-  if(page_type === 'delete'){
+  var {id, name, pw, pw_check} = req.body;
+  var image = req.file;
+  if(page_type === 'delete'){//탈퇴
     db.query("DELETE FROM user WHERE id = ?", [id], (error1, result1) =>{ //모든 정보 삭제(본인 회원정보)
       if(error1) throw error1;
       db.query("DELETE FROM list WHERE user_id = ?", [id], (error2, result2) =>{ //모든 정보 삭제(본인 글)
@@ -258,9 +259,44 @@ exports.user_update = (req, res) => {
         });
       });
     });
-  }else if(page_type === 'update'){
-    
-  }else if(page_type === 'password'){
-    
+  }else if(page_type === 'update'){//이름 수정
+    let sql1 = "UPDATE user SET name = ? WHERE id = ?";
+    db.query(sql1, [name, id], (error, result) => {
+      if(error) throw error;
+      res.status(200).redirect("/profile");
+    });
+  }else if(page_type === 'image'){//사진 수정
+    if(!image){
+      return res.render("profile_update", {
+        message: "프로필 사진을 등록하세요.",
+        user: req.body,
+        page_type: req.query.u
+      });
+    }
+    let sql2 = "UPDATE user SET img = ? WHERE id = ?";
+    db.query(sql2, [image.filename, id], (error, result) => {
+      if(error) throw error;
+      res.status(200).redirect("/profile");
+    })
+  }else if(page_type === 'password'){//비밀번호 수정
+    if(!pw || !pw_check){
+      return res.render("profile_update", {
+        message: "비밀번호를 입력하세요.",
+        user: req.body,
+        page_type: req.query.u
+      });
+    }else if(pw !== pw_check){
+      return res.render("profile_update", {
+        message: "비밀번호가 일치하지 않습니다..",
+        user: req.body,
+        page_type: req.query.u
+      });
+    }else{
+      let sql3 = "UPDATE user SET pw = ? WHERE id = ?";
+      db.query(sql3, [pw, id], (error, result) => {
+        if(error) throw error;
+        res.status(200).redirect("/profile");
+      });
+    }
   }
 }

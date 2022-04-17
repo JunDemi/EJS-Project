@@ -11,7 +11,7 @@
             <input type="hidden" name="img" value="<%=user.img%>">
             <input type="password" class="form-control regist_text" name="pw" id="pw">
         </div>
-        <input type="button" class="btn btn-primary" value="뒤로" onclick="history.back()">
+        <input type="button" class="btn btn-primary" value="뒤로" onclick="location.href='/profile'">
         <input type="submit" class="btn btn-primary" value="확인">
     </form>
     <% if(locals.message) { %>

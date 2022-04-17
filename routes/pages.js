@@ -174,4 +174,15 @@ router.get("/user_update_check", authCon.isLogin, (req, res) => {
     res.redirect("/login");
   }
 });
+//프로필-사진 수정/비밀번호 수정 화면
+router.get("/profile_update", authCon.isLogin, (req, res) => {
+  if (req.user) {
+    res.render("profile_update", {
+      user: req.user,
+      page_type: req.query.u
+    });
+  } else {
+    res.redirect("/login");
+  }
+});
 module.exports = router;
