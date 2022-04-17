@@ -166,9 +166,9 @@ exports.view = (req, res) => {
   //댓글 전용 파라미터
   var getParam = req.query.c;
   if (getParam === "insert") {
-    var { text, user_id, list_no } = req.body;
-    let sql = "INSERT INTO comment VALUES(null,?,?,?,now())";
-    db.query(sql, [list_no, user_id, text], (error, result) => {
+    var { text, user_id, list_no, view_id } = req.body;
+    let sql = "INSERT INTO comment VALUES(null,?,?,?,?,now())";
+    db.query(sql, [list_no, user_id, view_id, text], (error, result) => {
       if (error) throw error;
       res.status(200).redirect(`/view?no=${list_no}`);
     });
@@ -209,10 +209,12 @@ exports.update = (req, res) => {
       });
     }
   } else if (getParam === "delete") {
-    let sql2 = `DELETE FROM list WHERE no = ?`;
-    db.query(sql2, [no], (error2, result2) => {
+    db.query("DELETE FROM list WHERE no = ?", [no], (error2, result2) => {
       if (error2) throw error2;
-      res.status(200).redirect("/list");
+      db.query("DELETE FROM comment WHERE list_no = ?", [no], (error3, result3) => {//해당 글의 댓글 삭제
+        if (error3) throw error3;
+        res.status(200).redirect("/list");
+      });
     });
   }
 };
@@ -244,18 +246,21 @@ exports.user_update = (req, res) => {
   var {id, name, pw, pw_check} = req.body;
   var image = req.file;
   if(page_type === 'delete'){//탈퇴
-    db.query("DELETE FROM user WHERE id = ?", [id], (error1, result1) =>{ //모든 정보 삭제(본인 회원정보)
+    db.query("DELETE FROM user WHERE id = ?", [id], (error1, result1) =>{ //삭제(본인 회원정보)
       if(error1) throw error1;
-      db.query("DELETE FROM list WHERE user_id = ?", [id], (error2, result2) =>{ //모든 정보 삭제(본인 글)
+      db.query("DELETE FROM list WHERE user_id = ?", [id], (error2, result2) =>{ //삭제(본인 글)
         if(error2) throw error2;
-        db.query("DELETE FROM comment WHERE user_id = ?", [id], (error3, result3) =>{ //모든 정보 삭제(본인 댓글)
+        db.query("DELETE FROM comment WHERE user_id = ?", [id], (error3, result3) =>{ //삭제(본인 댓글)
           if(error3) throw error3;
-          res.cookie("jwt", "", {
-            //회원 탈퇴와 동시에 쿠키 제거
-            expires: new Date(Date.now() + 2 * 1000),
-            httpOnly: true,
-          });
-          res.status(200).redirect("/");
+          db.query("DELETE FROM comment WHERE writer_id = ?", [id], (error4, result4) =>{ //삭제(본인 글의 댓글)
+            if(error4) throw error4;
+            res.cookie("jwt", "", {
+              //회원 탈퇴와 동시에 쿠키 제거
+              expires: new Date(Date.now() + 2 * 1000),
+              httpOnly: true,
+            });
+            res.status(200).redirect("/");
+          })
         });
       });
     });

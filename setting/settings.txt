@@ -41,6 +41,7 @@ CREATE TABLE `jungwook`.`comment` (
   `c_no` INT NOT NULL AUTO_INCREMENT,
   `list_no` INT NOT NULL,
   `user_id` VARCHAR(100) NOT NULL,
+  `writer_id` VARCHAR(100) NOT NULL,
   `text` TEXT NOT NULL,
   `date` DATETIME NOT NULL,
   PRIMARY KEY (`c_no`));
