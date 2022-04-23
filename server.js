@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/', require('./routes/pages'));
+app.use('/', require('./routes/pages')); //routes/pages에서 ejs페이지 설정
 app.use('/auth', require('./routes/auth'));
 
 app.listen(5000, ()=> {
