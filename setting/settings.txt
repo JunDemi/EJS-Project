@@ -49,3 +49,19 @@ CREATE TABLE `jungwook`.`comment` (
 git config --global user.name JunDemi
 git config --global user.email jungwook3176@gmail.com
 
+(heroku)
+CLI설치
+
+heroku login
+
+git init
+
+heroku git:remote -a '헤로쿠 프로젝트 명'
+
+git status
+git add .
+git commit -am "메세지"
+git push heroku master
+
+git config --global user.name Personal
+git config --global user.email jungwook3176@gmail.com
