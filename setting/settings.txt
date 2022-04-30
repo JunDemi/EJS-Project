@@ -13,7 +13,7 @@ npm i cookie-parser jsonwebtoken
 package.json -> "start" : "nodemon server.js"
 
 (mysql)
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234'; 
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'qkrwjddnr123'; 
 database: jungwook
 table: user / list / comment
 
