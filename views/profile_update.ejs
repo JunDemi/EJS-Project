@@ -20,7 +20,7 @@
         <div class="main_title">   
             사진 변경
         </div>
-        <form name="img_update_form" action="/auth/user_update?u=<%=page_type%>" method="post" enctype="multipart/form-data">
+        <form name="img_update_form" action="/auth/user_update?u=<%=page_type%>" method="post" enctype="multipart/form-data" autocomplete="off">
             <div class="mb-3">
                 <label for="image" class="form-label">새 프로필 사진</label>
                 <div class="img_container">
@@ -38,7 +38,7 @@
         <div class="main_title">   
             비밀번호 변경
         </div>
-        <form name="img_update_form" action="/auth/user_update?u=<%=page_type%>" method="post">
+        <form name="img_update_form" action="/auth/user_update?u=<%=page_type%>" method="post" autocomplete="off">
             <div class="mb-3">
                 <label for="pw" class="form-label">새 비밀번호</label>
                 <input type="password" class="form-control regist_text" id="pw" name="pw">

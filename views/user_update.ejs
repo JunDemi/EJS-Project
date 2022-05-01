@@ -12,7 +12,7 @@
             <input type="button" class="btn btn-primary" value="비밀번호 변경" onclick="location.href='profile_update?u=password'">
         </div>
     </div>    
-    <form name="user_update_form" action="/auth/user_update?u=update" method="post">
+    <form name="user_update_form" action="/auth/user_update?u=update" method="post" autocomplete="off">
         <div class="mb-3">
             <label for="name" class="form-label">이름</label>
             <input type="hidden" name="id" value="<%=user.id%>">
@@ -22,7 +22,7 @@
             <input type="button" class="btn btn-primary" value="뒤로" onclick="location.href='profile'">
             <input type="button" class="btn btn-primary" value="변경" onclick="updateCheck()">
     </form>
-    <form name="user_delete_form" action="/auth/user_update?u=delete" method="post">
+    <form name="user_delete_form" action="/auth/user_update?u=delete" method="post" autocomplete="off">
             <input type="hidden" name="id" value="<%=user.id%>">
             <input type="button" class="btn btn-primary back_btn" value="탈퇴" onclick="deleteCheck()">
         </div>

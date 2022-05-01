@@ -6,7 +6,7 @@
         <div class="list_title">
             <h5><%=total%>개의 글이 조회되었습니다.</h5>
             <div class="list_search">
-                <form name="list_search_form" action="/auth/list" method="post">
+                <form name="list_search_form" action="/auth/list" method="post" autocomplete="off">
                     <input name="search" id="search" type="text" placeholder="검색.." value="<%=locals.search%>">
                     <a onclick="listSearch()"><img src="/search.png"></a>
                 </form>

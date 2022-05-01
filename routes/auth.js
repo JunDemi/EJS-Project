@@ -1,5 +1,5 @@
 var express = require('express');
-var authCon = require('../controllers/user');
+var authCon = require('../controllers/control');
 var router = express.Router();
 var multer = require("multer");
 var storage = multer.diskStorage({

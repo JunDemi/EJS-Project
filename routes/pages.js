@@ -1,6 +1,6 @@
 var express = require("express");
 var db = require("../connection");
-var authCon = require("../controllers/user");
+var authCon = require("../controllers/control");
 var router = express.Router();
 //메인화면
 router.get("/", authCon.isLogin, (req, res) => {

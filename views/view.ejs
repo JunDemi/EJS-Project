@@ -8,7 +8,7 @@
             <span><%=view.name%></span>
             <p>최종 수정일 - <%=view.date%></p>
         </nav>
-        <form name="view_form" action="/auth/view" method="post">
+        <form name="view_form" action="/auth/view" method="post" autocomplete="off">
             <input type="hidden" name="no" value="<%=get.no%>">
             <input type="hidden" name="view_id" value="<%=view.user_id%>">
             <input type="hidden" name="user_id" value="<%=user.id%>">    
@@ -29,7 +29,7 @@
                 <% } %>          
             </div>
         </form>
-        <form name="comment_form" action="/auth/view?c=insert" method="post">
+        <form name="comment_form" action="/auth/view?c=insert" method="post" autocomplete="off">
             <div class="comment_write">
                 <img src="/<%=user.img%>">
                 <span><%=user.name%></span>

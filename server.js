@@ -1,12 +1,13 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var dotenv = require('dotenv');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
+const port = process.env.PORT;
 
 dotenv.config({path: './.env'});
-var app = express();
+const app = express();
 
-var public_dir = path.join(__dirname, './public');
+const public_dir = path.join(__dirname, './public');
 app.use(express.static(public_dir));
 app.set('view engine', 'ejs');
 
@@ -17,6 +18,6 @@ app.use(cookieParser());
 app.use('/', require('./routes/pages')); //routes/pages에서 ejs페이지 설정
 app.use('/auth', require('./routes/auth'));
 
-app.listen(5000, ()=> {
-    console.log('포트 5000번으로 서버 접속중...')
+app.listen(port, ()=> {
+    console.log('서버 접속중...')
 });

@@ -19,7 +19,7 @@
     <div class="main_title">
         글쓰기
     </div>
-    <form name="write_form" action="/auth/write" method="post" enctype="multipart/form-data">
+    <form name="write_form" action="/auth/write" method="post" enctype="multipart/form-data" autocomplete="off">
         <div class="mb-3">
             <input type="hidden" id="id" name="id" value="<%=user.id%>">
             <input type="hidden" id="name" name="name" value="<%=user.name%>">
