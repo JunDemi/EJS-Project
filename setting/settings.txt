@@ -1,6 +1,6 @@
 (npm)
 npm init -y
-npm i express mysql dotenv ejs
+npm i express mysql dotenv ejs cookie-parser
 npm i --save nodemon
 npm install date-and-time --save
 npm install multer
