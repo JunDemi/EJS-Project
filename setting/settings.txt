@@ -64,4 +64,4 @@ git commit -am "메세지"
 git push heroku master
 
 git config --global user.name Personal
-git config --global user.email jungwook3176@gmail.com
+git config --global user.email jungwook3176@gmail.coma
