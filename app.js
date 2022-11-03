@@ -18,6 +18,6 @@ app.use(cookieParser());
 app.use('/', require('./routes/pages')); //routes/pages에서 ejs페이지 설정
 app.use('/auth', require('./routes/auth'));
 
-app.listen(5000, ()=> {
+app.listen(port, ()=> {
     console.log('서버 접속중...')
 });
