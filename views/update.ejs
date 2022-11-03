@@ -27,7 +27,7 @@
             <div class="mb-3">
                 <textarea class="form-control write_text" rows="20" id="text" name="text"><%=view.text%></textarea>
             <% if(view.file){ %>
-                <img src="/<%=view.file%>" id="write_view">
+                <video src="/<%=view.file%>" id="write_view" width="450px" controls></video>
             </div>
             <input type="file" id="view_update_files" name="view_update_files" value="<%=view.file%>">
             <% }else { %>

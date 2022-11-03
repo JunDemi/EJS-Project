@@ -19,7 +19,7 @@
                 <textarea class="form-control write_text" rows="20" id="text" name="text"
                     readonly><%=view.text%></textarea>
                 <% if(view.file){ %>
-                <img src="/<%=view.file%>" class="view_img">
+                <video src="/<%=view.file%>" class="view_img" width="450px" controls></video>
                 <% } %>
             </div>
             <div class="btn_wrap">
