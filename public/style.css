@@ -51,6 +51,14 @@
 .title_bar ul li a:hover{
     color: #a0ceff;
 }
+/*인덱스 홈*/
+.index_grid_container{
+    font-size: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+}
 /*로그인*/
 .myform label{
     font-size: 14px;
